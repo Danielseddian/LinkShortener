@@ -16,7 +16,7 @@ class CreateShortLinkViewSet(GenericViewSet, mixins.CreateModelMixin):
 def redirector(request: Request, short: str) -> HttpResponse:
     """Redirect to origin url if exists else return 404 response"""
     link: m.ShortLink = get_object_or_404(m.ShortLink, short=short)
-    if dt.now().astimezone(tz.utc) < link.created + td(hours=link.expired):
+    if dt.now().astimezone(tz.utc) > link.created + td(hours=link.expired):
         raise Http404("Expired link")
 
     ip: str = request.META.get("HTTP_X_FORWARDED_FOR", "").split(",")[0] or request.META.get("REMOTE_ADDR")
