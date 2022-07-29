@@ -1,0 +1,5 @@
+Django==4.0.6
+python-dotenv==0.20.0
+python-environ==0.4.54
+django-bulk-update-or-create==0.3.0
+djangorestframework==3.13.1
